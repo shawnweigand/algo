@@ -28,10 +28,12 @@ class Solution {
 
         for (let r = 0; r < this.ROWS; r++) {
             for (let c = 0; c < this.COLS; c++) {
-                if (!this.visited.has(`${r},${c}`) && this.grid[r][c] === '1') {
+
+                if (!this.visited.has(`${r},${c}`) && this.grid[r][c] == '1') {
                     this.islands++
                     this.bfs(r, c)
                 }
+
             }
         }
 
@@ -46,20 +48,21 @@ class Solution {
 
         while (queue.length > 0) {
 
-            let [x, y] = queue.shift()
+            let [row, col] = queue.shift()
             let neighbors = []
 
-            if (x > 0) neighbors.push([x - 1, y])
-            if (x < this.ROWS - 1) neighbors.push([x + 1, y])
-            if (y > 0) neighbors.push([x, y - 1])
-            if (y < this.COLS - 1) neighbors.push([x, y + 1])
+            if (row > 0) neighbors.push([row - 1, col])
+            if (row < this.ROWS - 1) neighbors.push([row + 1, col])
+            if (col > 0) neighbors.push([row, col - 1])
+            if (row < this.COLS - 1) neighbors.push([row, col + 1])
 
-            for (const [row, col] of neighbors) {
-                if (!this.visited.has(`${row},${col}`) && this.grid[row][col] === '1') {
-                    this.visited.add(`${row},${col}`)
-                    queue.push([row, col])
+            for (const [x, y] of neighbors) {
+                if (!this.visited.has(`${x},${y}`) && this.grid[x][y] == '1') {
+                    this.visited.add(`${x},${y}`)
+                    queue.push([x, y])
                 }
             }
+
         }
 
     }
